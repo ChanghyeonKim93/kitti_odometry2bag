@@ -1,0 +1,29 @@
+<launch>
+    <!-- Directory where 'data_odometry_gray' and 'data_odometry_poses' folders are in. -->
+    <!-- Example 
+        {YOUR_DIR_DATA_ODOMETRY}
+            L data_odometry_gray
+                L dataset
+                    L sequences
+                        L 00
+                        L 01
+                        L 02
+                        L ...
+            L data_odometry_poses
+                L dataset
+                    L poses
+                        L 00.txt
+                        L 01.txt
+                        L 02.txt
+                        L ...
+    -->
+    <arg name="dir_data_odometry" default="/home/kch/Documents/kitti"/>
+    
+    <!-- The number of data (two digits): 00 ~ 10-->
+    <arg name="num_data"          default="00"/>
+
+    <node pkg="kitti_odometry2bag" name="kitti_odometry2bag" type="kitti_odometry2bag" output="screen">
+        <param name="dir_data_odometry" type="string" value="$(arg dir_data_odometry)"/>
+        <param name="num_data"          type="string" value="$(arg num_data)"/>
+    </node>
+</launch>

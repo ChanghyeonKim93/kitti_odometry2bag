@@ -53,6 +53,8 @@ public:
 
     bool isEnd();
 
+    int getDataLength();
+
 
 private:
 

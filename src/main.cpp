@@ -24,8 +24,14 @@ int main(int argc, char **argv) {
 
     ROS_INFO_STREAM("kitti_odometry2bag node starts.\n");
     
+    if(!ros::param::has("~dir_data_odometry")) throw std::runtime_error("'dir_data_odometry' is not set.");
+    if(!ros::param::has("~num_data")) throw std::runtime_error("'num_data' is not set.");
+
     string dir_dataodometry = "/home/kch/Documents/kitti";
-    string data_num = "00";
+    string data_num = "02";
+    ros::param::get("~dir_data_odometry", dir_dataodometry);
+    ros::param::get("~num_data", data_num);
+
     std::string dir;
     // ros::param::get("~directory", dir);
 
@@ -47,7 +53,7 @@ int main(int argc, char **argv) {
 
         kitti_loader = std::make_shared<KITTIOdometry2Bag>(nh, dir_dataodometry, data_num);
 
-        int idx_range[2] = {0,4539};
+        int idx_range[2] = {0, kitti_loader->getDataLength()-2};
         kitti_loader->setIndexRange(idx_range[0], idx_range[1]);
         kitti_loader->calcTimeRange();
         

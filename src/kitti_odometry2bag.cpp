@@ -188,3 +188,8 @@ void KITTIOdometry2Bag::calcTimeRange(){
 bool KITTIOdometry2Bag::isEnd(){
     return ( (this->timestamp_start_ + this->roswalltime_dt_) > this->timestamp_end_);
 };
+
+
+int KITTIOdometry2Bag::getDataLength(){
+    return n_data_;
+};
